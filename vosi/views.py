@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServer
 from .renderers import VosiAvailabilityRenderer, VosiCapabilityRenderer
 from .models import VOResource_Capability, Availability, AvailabilityOption
 
-def vosi_availability(request):
+def availability(request):
     # should perform checks here, if databases are still reachable etc.
     # should write to db the status and note, uTDate etc. via admin interface as well
 
@@ -30,7 +30,7 @@ def vosi_availability(request):
     return HttpResponse(VosiAvailabilityRenderer().render(data), content_type="application/xml")
 
 
-def vosi_capabilities(request):
+def capabilities(request):
 
     capabilities = VOResource_Capability.objects.order_by('id')
     # now join them together -> do it in renderer (not efficient, but ok for now)
