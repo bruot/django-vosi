@@ -4,6 +4,17 @@ Django vosi package
 
 **Implementation of IVOA Support Interfaces as resuable Django app**
 
+.. image:: https://travis-ci.org/kristinriebe/django-vosi.svg?branch=master
+   :alt: Build Status
+   :target: https://travis-ci.org/kristinriebe/django-vosi
+
+.. image:: https://coveralls.io/repos/github/kristinriebe/django-vosi/badge.svg?branch=master
+   :alt: Coverage Status
+   :target: https://coveralls.io/github/kristinriebe/django-vosi?branch=master
+
+.. image:: http://img.shields.io/badge/license-APACHE-blue.svg?style=flat
+    :target: https://github.com/kristinriebe/django-vosi/blob/master/LICENSE
+
 This package implements the `IVOA Support Interfaces <http://www.ivoa.net/documents/VOSI/20170524/REC-VOSI-1.1.html>`_.
 It was intially created for being used with the
 `django-prov_vo <https://github.com/kristinriebe/django-prov_vo>`_
