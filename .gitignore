@@ -1,5 +1,10 @@
 *pyc
 *~
-.coverage
+dist
+*egg*
+.gitignore
+readme*txt
+*env*
+*cover*
 
 

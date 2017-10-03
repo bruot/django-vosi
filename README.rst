@@ -70,7 +70,7 @@ Installation
       url(r'^capabilities/$', vosi.views.capabilities, name='vosi_capabilities'),
     ]
 
-    This is necessary, because the capabilities resource must be a sibling to the DAL resource, see Section 2 of `DALI <http://www.ivoa.net/documents/DALI/20170517/REC-DALI-1.1.html>`_ specification.
+  This is necessary, because the capabilities resource must be a sibling to the DAL resource, see Section 2 of `DALI <http://www.ivoa.net/documents/DALI/20170517/REC-DALI-1.1.html>`_ specification.
 
 * Install the requirements of this application, e.g. in a virtual environment::
 
@@ -109,3 +109,4 @@ TODO
 * Improve renderer (use lxml?)
 * Include more features (missing attributes for availability)
 * Write more tests
+* Use admin interface to adjust availability options and set availability
