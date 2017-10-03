@@ -4,11 +4,18 @@ Django vosi package
 
 **Implementation of IVOA Support Interfaces as resuable Django app**
 
-This package implements the IVOA Support Interfaces (http://www.ivoa.net/documents/VOSI/20170524/REC-VOSI-1.1.html).
-It was intially created for being used with the django-prov_vo package, but can be used with any other package/webapp implementing a Data Access Layer (DAL) interface for the virtual observatory (VO).
+This package implements the `IVOA Support Interfaces <http://www.ivoa.net/documents/VOSI/20170524/REC-VOSI-1.1.html>`_.
+It was intially created for being used with the
+`django-prov_vo <https://github.com/kristinriebe/django-prov_vo>`_
+package together with a web application like
+`provenance-rave <https://github.com/kristinriebe/provenance-rave>`_,
+but can be used with any other package/webapp implementing a Data
+Access Layer (DAL) interface for the virtual observatory (VO).
+Inspired by Daiquiri's VOSI implementation for TAP
+(`django-daiquiri <https://github.com/aipescience/django-daiquiri/>`_).
 
 **NOTE: This package does not (yet) include all VOSI features.
-Created using the specification VOSI 1.1.**
+Created using the VOSI specification version 1.1.**
 
 
 Installation
@@ -47,24 +54,58 @@ Installation
         'vosi',
     ]
 
-* You can add the vosi URLconf to your project's urls.py like this::
+* You *could* add the vosi URLconf to your project's urls.py like this::
 
     url(r'^vosi/', include('vosi.urls')),
 
-  but usually, you will want to create custom VOSI classes and interfaces inside the corresponding app providing the DAL interface, and thus create url's in their namespace (because the capabilities resource must be a sibling to the DAL resource, see Section 2 of DALI specification).
+  But most likely you need to copy the VOSI url's to the :code:`urls.py` file of your main project/package providing the data access layer interface::
+
+
+    from django.conf.urls import url, include
+    import vosi.urls
+
+    urlpatterns = [
+      ...
+      url(r'^availability/$', vosi.views.availability, name='vosi_availability'),
+      url(r'^capabilities/$', vosi.views.capabilities, name='vosi_capabilities'),
+    ]
+
+    This is necessary, because the capabilities resource must be a sibling to the DAL resource, see Section 2 of `DALI <http://www.ivoa.net/documents/DALI/20170517/REC-DALI-1.1.html>`_ specification.
 
 * Install the requirements of this application, e.g. in a virtual environment::
 
     virtualenv -p /usr/bin/python2.7 env
     source env/bin/activate
 
-    cd django-prov_vo
+    cd django-vosi
     pip install -r requirements.txt
 
-* Run :code:`python manage.py migrate` to update the database and create the provenance models.
+* Run :code:`python manage.py migrate` to update the database and create the VOSI database tables.
+
+* Inser the VOSI data specific for your web application, see `django-prov_vo <https://github.com/kristinriebe/django-prov_vo>`_ for an example.
+
+
+Testing
+-----------
+
+* This django application can be tested standalone, outside the project. First create a virtual environment and install the required python (2.7) packages::
+
+    virtualenv -p /usr/bin/python2.7 env
+    source env/bin/activate
+
+    pip install -r requirements.txt
+
+* Now switch to vosi and run::
+
+    cd vosi
+    python runtests.py
+
+* This runs all the tests stored in :code:`tests`.
+
 
 TODO
 ----
+* Implement tables endpoint as well
 * Improve renderer (use lxml?)
-* Include more features
-* Do proper db tests for availability endpoint
+* Include more features (missing attributes for availability)
+* Write more tests
