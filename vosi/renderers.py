@@ -1,9 +1,6 @@
-from __future__ import unicode_literals
-
 from django.utils.xmlutils import SimplerXMLGenerator
-from django.utils.six.moves import StringIO
+from io import StringIO
 from django.utils.encoding import smart_text
-from django.utils.encoding import smart_unicode
 from rest_framework.renderers import BaseRenderer
 from django.utils import timezone
 import lxml.etree as etree  # for pretty printing xml
@@ -53,7 +50,7 @@ class VosiAvailabilityRenderer(BaseRenderer):
 
             # add mandatory node:
             xml.startElement('vosi:available', {})
-            xml.characters(smart_unicode(data['available']))
+            xml.characters(smart_text(data['available']))
             xml.endElement('vosi:available')
 
             # remove available from data dict
@@ -62,7 +59,7 @@ class VosiAvailabilityRenderer(BaseRenderer):
             # add possible optional nodes:
             for key in data.keys():
                 xml.startElement('vosi:'+key, {})
-                xml.characters(smart_unicode(data[key]))
+                xml.characters(smart_text(data[key]))
                 xml.endElement('vosi:'+key)
 
             xml.endElement('vosi:availability')
@@ -155,7 +152,7 @@ class VosiCapabilityRenderer(BaseRenderer):
                         attrs = {}
                         attrs['use'] = accessurl.use  # throw error, if its not there?
                         xml.startElement('accessURL', attrs)
-                        xml.characters(smart_unicode(accessurl.url))
+                        xml.characters(smart_text(accessurl.url))
                         xml.endElement('accessURL')
 
                     xml.endElement('interface')
