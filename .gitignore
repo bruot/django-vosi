@@ -6,5 +6,4 @@ dist
 readme*txt
 *env*
 *cover*
-
-
+/.idea/
