@@ -1,6 +1,4 @@
 django>=1.10
-django-braces
 djangorestframework
 pytz
 lxml
-
